@@ -16,6 +16,7 @@ const App = () => {
       <ThemeProvider theme={{}}>
         <GlobalStyling />
         <div>Application</div>
+        <div>Application</div>
       </ThemeProvider>
     </React.StrictMode>
   );

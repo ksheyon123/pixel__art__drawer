@@ -2,8 +2,9 @@
   "name": "pixel-drawer",
   "version": "0.0.0",
   "description": "PC application for drawing pixel art",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "electron": "electron .",
     "webpack": "webpack --config config/webpack.config.js",
     "start": "webpack-dev-server --config config/webpack.config.js"
   },
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/ksheyon123/resume#readme",
   "dependencies": {
+    "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@types/node": "^18.11.19",
@@ -26,9 +28,13 @@
     "@types/styled-components": "^5.1.26",
     "babel-loader": "^9.1.2",
     "babel-preset-es2015": "^6.24.1",
+    "electron": "^23.1.0",
+    "electron-builder": "^23.6.0",
+    "electron-is-dev": "^2.0.0",
     "html-webpack-plugin": "^5.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "styled-components": "^5.3.6",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",
