@@ -1,7 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import { RouterProvider } from "react-router-dom";
+// import { ThemeProvider, createGlobalStyle } from "styled-components";
 
-// const rootEl = document.getElementById("root")!;
+import ReactDOM from "react-dom/client";
+import { Router } from "src/Router";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <RouterProvider router={Router} />
+);
