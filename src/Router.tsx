@@ -1,28 +1,17 @@
-import { createHashRouter } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
+import { createBrowserRouter } from "react-router-dom";
+import { LoginPage, PalettePage } from "src/Pages/index";
 
-const GlobalStyling = createGlobalStyle`
-  * {
-    box-sizing  : content-box;
-  }
-  body {
-    margin : 0px;
-  }
-`;
-
-const Router = createHashRouter([
+const Router = createBrowserRouter([
   {
     path: "/",
-    // element: <Root />,
+    element: <LoginPage />,
     // loader: rootLoader,
-    children: [
-      {
-        path: "team",
-        // element: <Team />,
-        // loader: teamLoader,
-      },
-    ],
   },
-])
+  {
+    path: "/palette",
+    element: <PalettePage />,
+    // loader: rootLoader,
+  },
+]);
 
 export { Router };

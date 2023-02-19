@@ -6,6 +6,7 @@ module.exports = {
   devServer: {
     port: 3000,
     hot: true,
+    open: false,
   },
   entry: "./src/index.tsx",
   output: {
@@ -14,7 +15,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      components: path.resolve(__dirname, "..", "src"),
+      src: path.resolve(__dirname, "..", "src"),
     },
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
