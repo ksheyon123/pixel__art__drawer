@@ -31,6 +31,11 @@ const StyledView = styled.div`
     width : 400px;
     height : 650px;
     border : 1px solid ${theme.mono4};
+    padding : 20px;
+    & > div.input-wrapper {
+      display: grid;
+
+    }
   }
 `;
 

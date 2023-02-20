@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useValidateInput } from "./useValidateInput";
+import { useValidateInput } from "src/Hooks/useValidateInput";
 import { StyledWrapper } from "./styled-input";
 
 const Input: React.FC = () => {
