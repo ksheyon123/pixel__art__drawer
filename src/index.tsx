@@ -3,19 +3,21 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { Router } from "src/Router";
+import "src/Styles/fonts.css";
 import { theme } from "src/Styles/theme";
 import { Loader } from "src/Components/index";
 
 const GlobalStyling = createGlobalStyle`
   * {
-    box-sizing  : content-box;
+    box-sizing  : border-box;
   }
   body {
+    font-family : Kong;
+    font-style: normal;
+    font-weight: 400;
     margin : 0px;
   }
 `;
-
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

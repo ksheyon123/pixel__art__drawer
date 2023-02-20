@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { useValidateInput } from "src/Hooks/useValidateInput";
-import { StyledWrapper } from "./styled-input";
+import { StyledInput } from "./styled-input";
 
-const Input: React.FC = () => {
+interface IProps {
+  width?: number;
+  height?: number;
+}
+
+const Input: React.FC<IProps> = ({
+  width,
+  height
+}) => {
 
   const [userInput, setUserInput] = useState<string>("");
   const { validate } = useValidateInput();
@@ -14,12 +22,12 @@ const Input: React.FC = () => {
   }
 
   return (
-    <StyledWrapper>
-      <input
-        onChange={(e) => handleOnChange(e.target.value)}
-        value={userInput}
-      />
-    </StyledWrapper>
+    <StyledInput
+      width={width}
+      height={height}
+      onChange={(e) => handleOnChange(e.target.value)}
+      value={userInput}>
+    </StyledInput>
   )
 }
 
