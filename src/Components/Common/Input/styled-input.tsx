@@ -13,7 +13,8 @@ const StyledInput = styled.input.attrs(({ width, height }: UIProps) => ({
     width :${({ width }) => !!width ? width : "100%"}; 
     height :${({ height }) => !!height ? height : "100%"}; 
     border : none;
-    padding :15px 5px;
+    padding :10px 5px;
+    background-color : transparent;
     &:focus {
       outline: none;
     }

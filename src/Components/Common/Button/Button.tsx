@@ -1,11 +1,21 @@
 import React from "react";
-import { StyledWrapper } from "./styled-button";
+import { StyledButton } from "./styled-button";
 
-const Button: React.FC = () => {
+interface IProps {
+  name: string;
+  onClick: () => void;
+  disabled: boolean;
+}
+
+const Button: React.FC<IProps> = ({ name, onClick, disabled }) => {
 
   return (
-    <StyledWrapper>
-    </StyledWrapper>
+    <StyledButton
+      disabled={disabled}
+      onClick={() => onClick()}
+    >
+      {name}
+    </StyledButton>
   )
 }
 
