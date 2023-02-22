@@ -6,6 +6,9 @@ const createWindow = () => {
     width: 800,
     height: 800,
     title: "Pixel Art Drawer",
+    titleBarStyle: "customButtonsOnHover",
+    frame: false,
+    resizable: false,
   });
 
   win.loadURL("http://127.0.0.1:3000");

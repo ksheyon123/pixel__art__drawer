@@ -1,10 +1,14 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
+import { Layout } from "src/Components/index";
 import { LoginPage, PalettePage } from "src/Pages/index";
 
-const Router = createBrowserRouter([
+const Router = createHashRouter([
   {
     path: "/",
-    element: <LoginPage />,
+    element:
+      <Layout>
+        <LoginPage />
+      </Layout>,
     // loader: rootLoader,
   },
   {
