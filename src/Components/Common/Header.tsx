@@ -10,7 +10,13 @@ const Header: React.FC = () => {
 }
 
 const StyledHeader = styled.div`
-
+  position :fixed;
+  z-index : 10;
+  top : 0px;
+  width : 800px;
+  height : 50px;
+  background-color: transparent;
+  -webkit-app-region: drag;
 `;
 
 export { Header }

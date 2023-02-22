@@ -1,5 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { Layout } from "src/Components/index";
+import { Layout, Header } from "src/Components/index";
 import { LoginPage, PalettePage } from "src/Pages/index";
 
 const Router = createHashRouter([
@@ -9,11 +9,16 @@ const Router = createHashRouter([
       <Layout>
         <LoginPage />
       </Layout>,
-    // loader: rootLoader,
   },
   {
     path: "/palette",
-    element: <PalettePage />,
+    element:
+      <Layout>
+        <>
+          <Header />
+          <PalettePage />
+        </>
+      </Layout>
     // loader: rootLoader,
   },
 ]);

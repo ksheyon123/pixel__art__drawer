@@ -5,6 +5,7 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 800,
+    // show: false,
     title: "Pixel Art Drawer",
     titleBarStyle: "customButtonsOnHover",
     frame: false,
@@ -12,6 +13,7 @@ const createWindow = () => {
   });
 
   win.loadURL("http://127.0.0.1:3000");
+  win.setWindowButtonVisibility(false);
 
   if (isDev) {
     win.webContents.openDevTools({ mode: "detach" });
