@@ -6,15 +6,12 @@ const PalettePage: React.FC = () => {
 
   const canvasEl = useRef<HTMLCanvasElement>();
   const [ratio, setRatio] = useState<number>(1);
-  console.log(ratio);
   const getPosition = (e: PointerEvent) => {
-    console.log(e.clientX);
-    console.log(e.clientY);
+
 
   }
 
   const zoomInOut = (e: any) => {
-    console.log(e);
     setRatio(ratio => (ratio >= 0.2 ? ratio + 0.001 * e.deltaY : 0.2));
   }
 
