@@ -7,8 +7,11 @@ const PalettePage: React.FC = () => {
   const canvasEl = useRef<HTMLCanvasElement>();
   const [ratio, setRatio] = useState<number>(1);
   const getPosition = (e: PointerEvent) => {
-
-
+    const { current } = canvasEl;
+    const elemRect = current.getBoundingClientRect();
+    console.log(e.clientX - elemRect.left);
+    console.log(e.clientY - elemRect.top);
+    // console.log(offsetY + e.clientY);
   }
 
   const zoomInOut = (e: any) => {
@@ -27,7 +30,7 @@ const PalettePage: React.FC = () => {
     <StyledView
       className="container"
       ratio={ratio}
-      onResize={(e: any) => zoomInOut(e)}
+      onWheel={(e: any) => zoomInOut(e)}
     >
       <canvas
         ref={canvasEl as RefObject<HTMLCanvasElement>} />
