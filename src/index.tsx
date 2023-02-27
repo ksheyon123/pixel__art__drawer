@@ -7,6 +7,16 @@ import "src/Styles/fonts.css";
 import { theme } from "src/Styles/theme";
 import { Loader } from "src/Components/index";
 
+declare global {
+  interface Window {
+    electron: {
+      ipcRenderer: {
+        onResize(channel: string, args: any): void;
+      };
+    };
+  }
+}
+
 const GlobalStyling = createGlobalStyle`
   * {
     box-sizing  : border-box;

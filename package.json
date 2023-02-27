@@ -2,7 +2,7 @@
   "name": "pixel-drawer",
   "version": "0.0.0",
   "description": "PC application for drawing pixel art",
-  "main": "main.js",
+  "main": "electron/main.js",
   "scripts": {
     "electron": "electron .",
     "webpack": "webpack --config config/webpack.config.js",

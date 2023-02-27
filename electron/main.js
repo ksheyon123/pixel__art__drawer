@@ -1,5 +1,6 @@
 const { app, BrowserWindow, session } = require("electron");
 const isDev = require("electron-is-dev");
+const { ipcModule } = require("./ipcMain");
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -9,12 +10,11 @@ const createWindow = () => {
     title: "Pixel Art Drawer",
     titleBarStyle: "customButtonsOnHover",
     frame: false,
-    resizable: false,
+    // resizable: false,
   });
 
   win.loadURL("http://127.0.0.1:3000");
   win.setWindowButtonVisibility(false);
-
   if (isDev) {
     win.webContents.openDevTools({ mode: "detach" });
   }
@@ -23,6 +23,7 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   win = createWindow();
+  ipcModule(win);
   // session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
   //   callback({
   //     responseHeaders: {
