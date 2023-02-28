@@ -4,18 +4,30 @@ import { theme } from "src/Styles/theme";
 
 const PalettePage: React.FC = () => {
 
-  const canvasEl = useRef<HTMLCanvasElement>();
+  const divEl = useRef<HTMLDivElement>();
   const [ratio, setRatio] = useState<number>(1);
   const [coord, setCoord] = useState<{ x: number; y: number }>({
     x: 0,
     y: 0
   })
-  const getPosition = (e: PointerEvent) => {
-    const { current } = canvasEl;
+  const startToDrag = (e: PointerEvent) => {
+    const { current } = divEl;
     const elemRect = current.getBoundingClientRect();
     const coordX = e.clientX - elemRect.left;
     const coordY = e.clientY - elemRect.top;
-    console.log(coordX, coordY)
+    console.log("start", coordX, coordY)
+    setCoord({
+      x: coordX,
+      y: coordY,
+    })
+  }
+
+  const endToDrag = (e: PointerEvent) => {
+    const { current } = divEl;
+    const elemRect = current.getBoundingClientRect();
+    const coordX = e.clientX - elemRect.left;
+    const coordY = e.clientY - elemRect.top;
+    console.log("end", coordX, coordY)
     setCoord({
       x: coordX,
       y: coordY,
@@ -23,29 +35,30 @@ const PalettePage: React.FC = () => {
   }
 
   const zoomInOut = (e: any) => {
-    console.log(e);
-    setRatio(ratio => (ratio >= 0.2 ? ratio + 0.001 * e.deltaY : 0.2));
+    setRatio(ratio => (ratio >= 0.2 ? ratio + 0.01 * e.deltaY : 0.2));
   }
 
   useEffect(() => {
-    const { current } = canvasEl;
+    const { current } = divEl;
     if (current) {
-      current.addEventListener("click", getPosition);
-      return () => current.removeEventListener("click", getPosition);
+      current.addEventListener("mousedown", startToDrag);
+      current.addEventListener("mouseup", endToDrag)
+      return () => {
+        current.removeEventListener("mousedown", startToDrag);
+        current.addEventListener("mouseup", endToDrag)
+      }
     }
   }, []);
-
-  const originX = Math.round(coord.x / 800 * 100);
-  const originY = Math.round(coord.y / 800 * 100);
-
+  const _ratio = Math.floor(ratio * 100) / 100;
   return (
-    <StyledView className="container" >
+    <StyledView
+      className="container"
+      ref={divEl as RefObject<HTMLDivElement>}
+    >
       <StyledCanvas
-        ratio={ratio}
-        x={originX}
-        y={originY}
+        ratio={_ratio}
         onWheel={(e) => zoomInOut(e)}
-        ref={canvasEl as RefObject<HTMLCanvasElement>} />
+      />
     </StyledView>
   )
 }
@@ -58,18 +71,15 @@ const StyledView = styled.div`
   height : 100vh;
 `;
 
-const StyledCanvas = styled.canvas.attrs(({ ratio, x, y }: any) => ({
+const StyledCanvas = styled.canvas.attrs(({ ratio }: any) => ({
   ratio,
-  x,
-  y
 }))`
-position : absolute;
-  width: ${props => 800 / props.ratio}px;
-  height: ${props => 800 / props.ratio}px;
-  /* transform: scale(${props => props.ratio}); */
-  transform-origin: ${props => props.x}% ${props => props.y}%;
+  position : absolute;
+  width: 800px;
+  height: 800px;
   background-color : ${theme.mono6};
-
+  transform-origin: 50% 50%;
+  transform: scale(${props => props.ratio});
 `;
 
 
