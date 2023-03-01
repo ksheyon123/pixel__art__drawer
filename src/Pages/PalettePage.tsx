@@ -61,19 +61,35 @@ const PalettePage: React.FC = () => {
     <StyledView
       className="container"
       ref={divEl as RefObject<HTMLDivElement>}
+      onWheel={(e) => zoomInOut(e)}
     >
       <StyledScaleIndicator ratio={_ratio} />
       <StyledCanvasWrapper
         className="wrapper draggable"
         ratio={_ratio}
-        onWheel={(e) => zoomInOut(e)}
       >
         <StyledCanvas />
         <StyledGrid ref={gridEl as RefObject<HTMLDivElement>} />
       </StyledCanvasWrapper>
+      <StyledPalette>
+        <div className="palette">
+
+        </div>
+      </StyledPalette>
     </StyledView>
   )
 }
+
+const StyledPalette = styled.div`
+  position : fixed;
+  bottom : 20px;
+  & > div.palette {
+    border : 1px solid ${theme.mono6};
+    width : 600px;
+    height : 40px;
+    background-color: ${theme.mono1};
+  }
+`;
 
 const StyledScaleIndicator = styled.div.attrs(({ ratio }: any) => ({
   ratio,
