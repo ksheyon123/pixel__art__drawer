@@ -1,6 +1,6 @@
 import { createHashRouter } from "react-router-dom";
 import { Layout, Header } from "src/Components/index";
-import { LoginPage, PalettePage } from "src/Pages/index";
+import { LoginPage, CanvasPage, ElementSelectPage } from "src/Pages/";
 
 const Router = createHashRouter([
   {
@@ -11,12 +11,22 @@ const Router = createHashRouter([
       </Layout>,
   },
   {
+    path: "/setup",
+    element:
+      <Layout>
+        <>
+          <Header />
+          <ElementSelectPage />
+        </>
+      </Layout>
+  },
+  {
     path: "/palette",
     element:
       <Layout>
         <>
           <Header />
-          <PalettePage />
+          <CanvasPage />
         </>
       </Layout>
     // loader: rootLoader,

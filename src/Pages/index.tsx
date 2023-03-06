@@ -1,2 +1,3 @@
 export { LoginPage } from "src/Pages/LoginPage";
-export { PalettePage } from "src/Pages/PalettePage";
+export { CanvasPage } from "src/Pages/CanvasPage";
+export { ElementSelectPage } from "src/Pages/ElementSelectPage";

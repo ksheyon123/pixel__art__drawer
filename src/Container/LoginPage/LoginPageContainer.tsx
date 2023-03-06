@@ -13,7 +13,7 @@ const LoginPageContainer = () => {
   const getLogin = async () => {
     try {
       validate();
-      navigate(PATH.PALETTE);
+      navigate(PATH.SETUP);
     } catch (e) {
       throw e;
     }

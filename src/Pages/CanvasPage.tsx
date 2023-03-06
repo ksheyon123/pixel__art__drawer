@@ -2,7 +2,7 @@ import React, { useRef, RefObject, useEffect, useState } from "react";
 import styled from "styled-components";
 import { theme } from "src/Styles/theme";
 
-const PalettePage: React.FC = () => {
+const CanvasPage: React.FC = () => {
 
   const divEl = useRef<HTMLDivElement>();
   const gridEl = useRef<HTMLDivElement>();
@@ -151,4 +151,4 @@ const StyledGrid = styled.div`
 `;
 
 
-export { PalettePage } 
+export { CanvasPage } 
