@@ -20,10 +20,10 @@ const ElementSelectPage: React.FC = () => {
         Body
       </div>
       <div>
-        Hand
+        Right Hand
       </div>
       <div>
-        Hand Action
+        Right Hand Action
       </div>
       <div>
         Foot
