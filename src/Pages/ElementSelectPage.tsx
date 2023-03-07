@@ -8,28 +8,12 @@ const ElementSelectPage: React.FC = () => {
   return (
     <StyledPage>
       <div>
-        Head
-      </div>
-      <div>
-        Eyes
-      </div>
-      <div>
-        Eyes Action
-      </div>
-      <div>
-        Body
-      </div>
-      <div>
-        Right Hand
-      </div>
-      <div>
-        Right Hand Action
-      </div>
-      <div>
-        Foot
-      </div>
-      <div>
-        Foot Action
+        <div>
+          Select Pixel
+        </div>
+        <div>
+
+        </div>
       </div>
       <div onClick={() => navigate(PATH.PALETTE)}>
         Next
@@ -39,8 +23,9 @@ const ElementSelectPage: React.FC = () => {
 }
 
 const StyledPage = styled.div`
-  /* display: grid; */
-  /* grid-template-columns: 1fr 1fr 1fr; */
+  
+  width : 100%;
+  height : 100%;
   padding-top : 50px;
 `;
 

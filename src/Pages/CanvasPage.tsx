@@ -1,11 +1,14 @@
 import React, { useRef, RefObject, useEffect, useState } from "react";
 import styled from "styled-components";
+import { Grid } from "src/Components/index";
+import { ipcOnResize } from "src/Interface/ipc";
 import { theme } from "src/Styles/theme";
 
 const CanvasPage: React.FC = () => {
 
   const divEl = useRef<HTMLDivElement>();
   const gridEl = useRef<HTMLDivElement>();
+  const [isShowGrid, setIsShowGrid] = useState<boolean>(false);
   const [ratio, setRatio] = useState<number>(1);
   const [coord, setCoord] = useState<{ x: number; y: number }>({
     x: 0,
@@ -36,7 +39,9 @@ const CanvasPage: React.FC = () => {
   }
 
   const zoomInOut = (e: any) => {
-    setRatio(ratio => (ratio >= 0.2 ? ratio + 0.01 * e.deltaY : 0.2));
+    // setRatio(ratio => (ratio >= 0.2 ? ratio + 0.01 * e.deltaY : 0.2));
+    // ipcOnResize("zoomin");
+
   }
 
   useEffect(() => {
@@ -66,14 +71,21 @@ const CanvasPage: React.FC = () => {
       <StyledScaleIndicator ratio={_ratio} />
       <StyledCanvasWrapper
         className="wrapper draggable"
-        ratio={_ratio}
+        ratio={1}
       >
         <StyledCanvas />
         <StyledGrid ref={gridEl as RefObject<HTMLDivElement>} />
+        {isShowGrid && (
+          <Grid />
+        )}
       </StyledCanvasWrapper>
       <StyledPalette>
         <div className="palette">
-
+          <div onClick={() => {
+            setIsShowGrid(!isShowGrid);
+          }}>
+            Show Grid
+          </div>
         </div>
       </StyledPalette>
     </StyledView>

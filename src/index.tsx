@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { Router } from "src/Router";
 import "src/Styles/fonts.css";
@@ -33,10 +34,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider theme={theme}>
     <GlobalStyling />
-    <RouterProvider
-      router={Router}
-      fallbackElement={<Loader />}
-    />
+    <RecoilRoot>
+      <RouterProvider
+        router={Router}
+        fallbackElement={<Loader />}
+      />
+    </RecoilRoot>
   </ThemeProvider>
 
 );

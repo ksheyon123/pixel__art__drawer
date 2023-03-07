@@ -1,11 +1,18 @@
 const { app, BrowserWindow, session } = require("electron");
 const isDev = require("electron-is-dev");
 const { ipcModule } = require("./ipcMain");
+const path = require("path");
 
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 800,
+    webPreferences: {
+      webSecurity: false,
+      nodeIntegration: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"),
+    },
     // show: false,
     title: "Pixel Art Drawer",
     titleBarStyle: "customButtonsOnHover",
