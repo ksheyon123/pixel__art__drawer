@@ -1,5 +1,7 @@
 import React, { useRef, RefObject, useEffect, useState } from "react";
 import styled from "styled-components";
+import { useRecoilValue, useRecoilCallback } from "recoil";
+import { gridPixelState } from "src/States/atom";
 import { Grid } from "src/Components/index";
 import { ipcOnResize } from "src/Interface/ipc";
 import { theme } from "src/Styles/theme";
@@ -7,19 +9,23 @@ import { theme } from "src/Styles/theme";
 const CanvasPage: React.FC = () => {
 
   const divEl = useRef<HTMLDivElement>();
-  const gridEl = useRef<HTMLDivElement>();
+  const canvasEl = useRef<HTMLCanvasElement>();
   const [isShowGrid, setIsShowGrid] = useState<boolean>(false);
+  const [twoDimensionArr, setTwoDimensionArr] = useState<any[]>([]);
   const [ratio, setRatio] = useState<number>(1);
   const [coord, setCoord] = useState<{ x: number; y: number }>({
     x: 0,
     y: 0
-  })
+  });
+
+  console.log(twoDimensionArr)
+  // const { x, y } = useRecoilValue(gridPixelState);
+
   const startToDrag = (e: PointerEvent) => {
     const { current } = divEl;
     const elemRect = current.getBoundingClientRect();
     const coordX = e.clientX - elemRect.left;
     const coordY = e.clientY - elemRect.top;
-    console.log("start", coordX, coordY)
     setCoord({
       x: coordX,
       y: coordY,
@@ -44,6 +50,27 @@ const CanvasPage: React.FC = () => {
 
   }
 
+  const getCoordinate = useRecoilCallback(({ snapshot }) => async (e: MouseEvent) => {
+    try {
+      const { x, y } = await snapshot.getPromise(gridPixelState);
+      const idxX = Math.floor(e.clientX / x);
+      const idxY = Math.floor(e.clientY / y);
+      setTwoDimensionArr((prev: any) => [...prev, prev[idxX][idxY]]);
+    } catch (e) {
+      throw e;
+    }
+
+  }, []);
+
+  useEffect(() => {
+    const { current } = canvasEl;
+    if (current) {
+      current.addEventListener("click", getCoordinate);
+      return () => current.removeEventListener("click", getCoordinate);
+    }
+
+  }, []);
+
   useEffect(() => {
     const { current } = divEl;
     if (current) {
@@ -56,10 +83,6 @@ const CanvasPage: React.FC = () => {
     }
   }, []);
 
-  const createGrid = () => {
-    let count = 0;
-
-  }
 
   const _ratio = Math.floor(ratio * 100) / 100;
   return (
@@ -73,8 +96,7 @@ const CanvasPage: React.FC = () => {
         className="wrapper draggable"
         ratio={1}
       >
-        <StyledCanvas />
-        <StyledGrid ref={gridEl as RefObject<HTMLDivElement>} />
+        <StyledCanvas ref={canvasEl as RefObject<HTMLCanvasElement>} />
         {isShowGrid && (
           <Grid />
         )}
