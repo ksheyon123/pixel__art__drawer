@@ -5,26 +5,25 @@ import { gridPixelState } from "src/States/atom";
 
 const Grid: React.FC = () => {
   const canvasEl = useRef<HTMLCanvasElement>();
+
+  // Cell 1 width & height;
   const { x, y } = useRecoilValue(gridPixelState);
 
   const drawGrid = useCallback(() => {
     const { current } = canvasEl;
     if (current) {
       const ctx = current.getContext("2d");
-      const gapX = 800 / x;
-      const gapY = 800 / y;
       ctx.beginPath();
       ctx.lineWidth = 1;
       for (let i = 0; i < 800 / x; i++) {
-        ctx.moveTo(i * gapX, 0);
-        ctx.lineTo(i * gapX, 800);
+        ctx.moveTo(i * x, 0);
+        ctx.lineTo(i * y, 800);
       }
       for (let j = 0; j < 800 / y; j++) {
-        ctx.moveTo(0, j * gapY);
-        ctx.lineTo(800, j * gapY);
+        ctx.moveTo(0, j * x);
+        ctx.lineTo(800, j * y);
       }
       ctx.stroke();
-
     }
   }, [canvasEl, x, y]);
 
@@ -34,6 +33,8 @@ const Grid: React.FC = () => {
 
   return (
     <StyledCanvas
+      width={800}
+      height={800}
       ref={canvasEl as RefObject<HTMLCanvasElement>}
     />
   )
@@ -41,8 +42,6 @@ const Grid: React.FC = () => {
 
 const StyledCanvas = styled.canvas`
 position : absolute;
-  width : 100%;
-  height : 100%;
   pointer-events: none;
   top : 0px;
 `;

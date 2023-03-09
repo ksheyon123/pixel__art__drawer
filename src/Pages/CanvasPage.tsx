@@ -122,7 +122,7 @@ const StyledScaleIndicator = styled.div.attrs(({ ratio }: any) => ({
     width : 20px;
     height :${props => props.ratio * 100}px ;
     background-color : blue;
-  border-radius: 4px;
+    border-radius: 4px;
     
   }
   &:after {
@@ -154,7 +154,6 @@ const StyledCanvas = styled.canvas`
   width: 800px;
   height: 800px;
   background-color : ${theme.mono6};
-  
 `;
 
 const StyledGrid = styled.div`
