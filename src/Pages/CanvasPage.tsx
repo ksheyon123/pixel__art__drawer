@@ -6,7 +6,7 @@ import { Grid } from "src/Components/index";
 import { ipcOnResize } from "src/Interface/ipc";
 import { theme } from "src/Styles/theme";
 
-const initTwoDimensionalArr = (rows: number, cols: number) => {
+const create2DArr = (rows: number, cols: number) => {
   let arr: any[][] = [];
   for (let i = 0; i < rows; i++) {
     arr[i] = [];
@@ -17,12 +17,22 @@ const initTwoDimensionalArr = (rows: number, cols: number) => {
   return arr;
 }
 
+const update2DArr = (arr: any[][], rows: number, cols: number, data: any) => {
+  arr.forEach((row: any[], rowIdx: number) => {
+    row.forEach((element: any, colIdx: number) => {
+      if (rowIdx === rows && colIdx === cols) {
+        element = data;
+      }
+    });
+  });
+}
+
 const CanvasPage: React.FC = () => {
 
   const divEl = useRef<HTMLDivElement>();
   const canvasEl = useRef<HTMLCanvasElement>();
   const [isShowGrid, setIsShowGrid] = useState<boolean>(false);
-  const [twoDimensionArr, setTwoDimensionArr] = useState<string[][]>(initTwoDimensionalArr(8, 8));
+  const [twoDimensionArr, setTwoDimensionArr] = useState<string[][]>(create2DArr(8, 8));
   const [ratio, setRatio] = useState<number>(1);
   const [coord, setCoord] = useState<{ x: number; y: number }>({
     x: 0,
@@ -66,10 +76,8 @@ const CanvasPage: React.FC = () => {
       const { x, y } = await snapshot.getPromise(gridPixelState);
       const idxX = Math.floor(e.clientX / x);
       const idxY = Math.floor(e.clientY / y);
-      let temp = twoDimensionArr;
-      temp[idxX][idxY] = "T";
-      const updated = temp;
-      console.log(updated);
+      const a = update2DArr(twoDimensionArr, idxX, idxY, "rgba(1, 1, 1)");
+      console.log(a);
       setTwoDimensionArr(twoDimensionArr);
     } catch (e) {
       throw e;
