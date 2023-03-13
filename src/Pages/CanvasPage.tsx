@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useRecoilValue, useRecoilCallback } from "recoil";
 import { gridPixelState } from "src/States/atom";
 import { Grid } from "src/Components/index";
+import { useDrawCanvas } from "src/Hooks/useDrawCanvas";
 import { ipcOnResize } from "src/Interface/ipc";
 import { theme } from "src/Styles/theme";
 
@@ -18,13 +19,17 @@ const create2DArr = (rows: number, cols: number) => {
 }
 
 const update2DArr = (arr: any[][], rows: number, cols: number, data: any) => {
+  let tempArr: any[][] = arr;
   arr.forEach((row: any[], rowIdx: number) => {
-    row.forEach((element: any, colIdx: number) => {
+    return row.forEach((_col: any, colIdx: number) => {
       if (rowIdx === rows && colIdx === cols) {
-        element = data;
+        tempArr[colIdx][rowIdx] = data;
+      } else {
+        tempArr[colIdx][rowIdx] = tempArr[colIdx][rowIdx];
       }
     });
   });
+  return tempArr;
 }
 
 const CanvasPage: React.FC = () => {
@@ -39,8 +44,7 @@ const CanvasPage: React.FC = () => {
     y: 0
   });
 
-  console.log(twoDimensionArr)
-  // const { x, y } = useRecoilValue(gridPixelState);
+  const { colorCanvas } = useDrawCanvas(canvasEl);
 
   const startToDrag = (e: PointerEvent) => {
     const { current } = divEl;
@@ -58,7 +62,6 @@ const CanvasPage: React.FC = () => {
     const elemRect = current.getBoundingClientRect();
     const coordX = e.clientX - elemRect.left;
     const coordY = e.clientY - elemRect.top;
-    console.log("end", coordX, coordY)
     setCoord({
       x: coordX,
       y: coordY,
@@ -76,9 +79,8 @@ const CanvasPage: React.FC = () => {
       const { x, y } = await snapshot.getPromise(gridPixelState);
       const idxX = Math.floor(e.clientX / x);
       const idxY = Math.floor(e.clientY / y);
-      const a = update2DArr(twoDimensionArr, idxX, idxY, "rgba(1, 1, 1)");
-      console.log(a);
-      setTwoDimensionArr(twoDimensionArr);
+      const returnArr = update2DArr(twoDimensionArr, idxX, idxY, "rgba(1, 1, 1)");
+      setTwoDimensionArr(returnArr);
     } catch (e) {
       throw e;
     }
@@ -118,7 +120,12 @@ const CanvasPage: React.FC = () => {
         className="wrapper draggable"
         ratio={1}
       >
-        <StyledCanvas ref={canvasEl as RefObject<HTMLCanvasElement>} />
+        <StyledCanvas
+          width={800}
+          height={800}
+          ref={canvasEl as RefObject<HTMLCanvasElement>}
+          onClick={(e: any) => colorCanvas(e)}
+        />
         {isShowGrid && (
           <Grid />
         )}
