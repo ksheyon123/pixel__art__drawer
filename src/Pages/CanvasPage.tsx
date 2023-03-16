@@ -44,7 +44,7 @@ const CanvasPage: React.FC = () => {
     y: 0
   });
 
-  const { colorCanvas } = useDrawCanvas(canvasEl);
+  const { colorCanvas, clearCanvas } = useDrawCanvas(canvasEl);
 
   const startToDrag = (e: PointerEvent) => {
     const { current } = divEl;
@@ -136,6 +136,11 @@ const CanvasPage: React.FC = () => {
             setIsShowGrid(!isShowGrid);
           }}>
             Show Grid
+          </div>
+          <div onClick={() => {
+            clearCanvas();
+          }}>
+            Clear Canvas
           </div>
         </div>
       </StyledPalette>

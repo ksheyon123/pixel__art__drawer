@@ -21,12 +21,13 @@ const useDrawCanvas = (ref: RefObject<HTMLCanvasElement>) => {
   const clearCanvas = useCallback(() => {
     const ctx = current.getContext("2d");
     ctx.beginPath();
-    ctx.fillRect(0, 0, 800, 800);
+    ctx.clearRect(0, 0, 800, 800);
     ctx.stroke();
   }, [current]);
 
   return {
-    colorCanvas
+    colorCanvas,
+    clearCanvas
   }
 }
 
