@@ -1,4 +1,4 @@
-import React, { useRef, RefObject, useEffect, useState } from "react";
+import React, { useRef, RefObject, useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { useRecoilValue, useRecoilCallback } from "recoil";
 import { gridPixelState } from "src/States/atom";
@@ -38,35 +38,23 @@ const CanvasPage: React.FC = () => {
   const canvasEl = useRef<HTMLCanvasElement>();
   const [isShowGrid, setIsShowGrid] = useState<boolean>(false);
   const [twoDimensionArr, setTwoDimensionArr] = useState<string[][]>(create2DArr(8, 8));
-  const [ratio, setRatio] = useState<number>(1);
-  const [coord, setCoord] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0
-  });
+  const [isStartToDraw, setIsStartToDraw] = useState<boolean>(false);
 
   const { colorCanvas, clearCanvas } = useDrawCanvas(canvasEl);
 
-  const startToDrag = (e: PointerEvent) => {
-    const { current } = divEl;
-    const elemRect = current.getBoundingClientRect();
-    const coordX = e.clientX - elemRect.left;
-    const coordY = e.clientY - elemRect.top;
-    setCoord({
-      x: coordX,
-      y: coordY,
-    })
-  }
+  const startToDrag = useCallback(() => {
+    setIsStartToDraw(true);
+  }, []);
 
-  const endToDrag = (e: PointerEvent) => {
-    const { current } = divEl;
-    const elemRect = current.getBoundingClientRect();
-    const coordX = e.clientX - elemRect.left;
-    const coordY = e.clientY - elemRect.top;
-    setCoord({
-      x: coordX,
-      y: coordY,
-    })
-  }
+  const draw = useCallback((e: PointerEvent) => {
+    if (isStartToDraw) {
+      colorCanvas(e);
+    }
+  }, [isStartToDraw]);
+
+  const endToDrag = useCallback(() => {
+    setIsStartToDraw(false);
+  }, []);
 
   const zoomInOut = (e: any) => {
     // setRatio(ratio => (ratio >= 0.2 ? ratio + 0.01 * e.deltaY : 0.2));
@@ -92,23 +80,24 @@ const CanvasPage: React.FC = () => {
       current.addEventListener("click", getCoordinate);
       return () => current.removeEventListener("click", getCoordinate);
     }
-
   }, []);
 
   useEffect(() => {
     const { current } = divEl;
     if (current) {
       current.addEventListener("mousedown", startToDrag);
-      current.addEventListener("mouseup", endToDrag)
+      current.addEventListener("mousemove", draw);
+      current.addEventListener("mouseup", endToDrag);
       return () => {
         current.removeEventListener("mousedown", startToDrag);
+        current.removeEventListener("mousemove", draw)
         current.addEventListener("mouseup", endToDrag)
       }
     }
-  }, []);
+  }, [isStartToDraw]);
 
 
-  const _ratio = Math.floor(ratio * 100) / 100;
+  const _ratio = Math.floor(1 * 100) / 100;
   return (
     <StyledView
       className="container"
