@@ -22,12 +22,15 @@ const Input: React.FC<IProps> = ({
   }
 
   return (
-    <StyledInput
-      width={width}
-      height={height}
-      onChange={(e) => handleOnChange(e.target.value)}
-      value={userInput}>
+    <StyledInput>
+      <input
+        width={width}
+        height={height}
+        onChange={(e) => handleOnChange(e.target.value)}
+        value={userInput}>
+      </input>
     </StyledInput>
+
   )
 }
 

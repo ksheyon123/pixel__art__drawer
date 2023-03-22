@@ -8,4 +8,9 @@ const gridPixelState = atom<{ x: number; y: number; }>({
   }
 });
 
-export { gridPixelState }
+const cellSizeState = atom<number>({
+  key: "cellSizeState",
+  default: 0
+})
+
+export { gridPixelState, cellSizeState }
