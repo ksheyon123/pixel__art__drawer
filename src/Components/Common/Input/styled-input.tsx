@@ -1,17 +1,9 @@
 import styled from "styled-components";
-import { theme } from "src/Styles/theme";
 
-type UIProps = {
-  width?: number;
-  height?: number;
-}
-
-const StyledInput = styled.div.attrs(({ width, height }: UIProps) => ({
-  width,
-  height
-}))`
-  width :${({ width }) => !!width ? width : "100%"}; 
-  height :${({ height }) => !!height ? height : "100%"}; 
+const StyledInput = styled.div`
+  position :relative;
+  width :"100%"; 
+  height : "100%"; 
   border : none;
   background-color : transparent;
   & > input {
@@ -24,6 +16,10 @@ const StyledInput = styled.div.attrs(({ width, height }: UIProps) => ({
     &:disabled {
       
     }
+  }
+  & > div.msg-error {
+    position: absolute;
+    
   }
 `;
 

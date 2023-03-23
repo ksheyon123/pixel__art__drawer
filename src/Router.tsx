@@ -7,6 +7,7 @@ const Router = createHashRouter([
     path: "/",
     element:
       <Layout>
+        <Header />
         <LoginPage />
       </Layout>,
   },
@@ -14,10 +15,8 @@ const Router = createHashRouter([
     path: "/setup",
     element:
       <Layout>
-        <>
-          <Header />
-          <ElementSelectPage />
-        </>
+        <Header />
+        <ElementSelectPage />
       </Layout>
   },
   {

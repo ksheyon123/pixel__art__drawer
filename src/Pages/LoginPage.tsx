@@ -22,11 +22,21 @@ const LoginPage: React.FC = () => {
         <div className="modal-title">LOGIN</div>
         <div className="input-wrapper">
           <div className="input-title">USER</div>
-          <Input />
+          <div className="input-area">
+            <Input
+              value={userId}
+              handleOnChange={setUserId}
+            />
+          </div>
         </div>
         <div className="input-wrapper">
           <div className="input-title">PASSWORD</div>
-          <Input />
+          <div className="input-area">
+            <Input
+              value={password}
+              handleOnChange={setPassword}
+            />
+          </div>
         </div>
         <div className="btn-wrapper">
           <Button name="Login" onClick={getLogin} disabled={false} />
@@ -70,6 +80,10 @@ const StyledView = styled.div`
       }
       &:last-of-type {
         margin-bottom : 0px;
+      }
+      & > div.input-area {
+        width : 100%;
+        height : 100%;
       }
     }
     & > div.btn-wrapper {

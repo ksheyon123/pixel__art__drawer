@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 interface IProps {
-  children: ReactElement;
+  children: ReactNode;
 }
 
 const Layout: React.FC<IProps> = ({ children }) => {
