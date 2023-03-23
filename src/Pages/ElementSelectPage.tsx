@@ -16,8 +16,6 @@ const ElementSelectPage: React.FC = () => {
           Insert Cell Size
         </div>
         <div>
-          <Input
-          />
         </div>
       </div>
       <div>

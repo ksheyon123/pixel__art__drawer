@@ -3,13 +3,14 @@ import styled from "styled-components";
 // import { useNavigate } from "react-router-dom";
 // import { PATH } from "src/Constants/index";
 import { LoginPageContainer } from "src/Container/index";
-import { Input, Button } from "src/Components/index"
+import { Input, Button, TextButton } from "src/Components";
 import { theme } from "src/Styles/theme";
 
 const LoginPage: React.FC = () => {
 
   const {
     getLogin,
+    getSignIn,
     setUserId,
     setPassword,
     userId,
@@ -35,6 +36,14 @@ const LoginPage: React.FC = () => {
             <Input
               value={password}
               handleOnChange={setPassword}
+            />
+          </div>
+        </div>
+        <div className="signin-btn-wrapper">
+          <div className="signin-btn">
+            <TextButton
+              name="signin"
+              handleOnClick={getSignIn}
             />
           </div>
         </div>
@@ -85,6 +94,10 @@ const StyledView = styled.div`
         width : 100%;
         height : 100%;
       }
+    }
+    & > div.signin-btn-wrapper {
+      display: inline-block;
+      float : right;
     }
     & > div.btn-wrapper {
       color : ${theme.mono1};

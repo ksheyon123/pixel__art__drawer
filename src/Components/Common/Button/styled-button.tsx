@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "src/Styles/theme";
 
 const StyledButton = styled.button`
   width : 100%;
@@ -11,4 +12,9 @@ const StyledButton = styled.button`
   }
 `;
 
-export { StyledButton }
+const StyledTextButton = styled(StyledButton)`
+  text-decoration: underline;
+  color : ${theme.mono8};
+`;
+
+export { StyledButton, StyledTextButton }

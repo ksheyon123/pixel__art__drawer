@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const RegisterPage: React.FC = () => {
+const SignInPage: React.FC = () => {
   return (
     <StyledView>
     </StyledView>
@@ -13,4 +13,4 @@ const StyledView = styled.div`
   height : 100vh;
 `;
 
-export { RegisterPage }
+export { SignInPage }

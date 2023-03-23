@@ -1,4 +1,3 @@
-import { ThemeContext } from "styled-components"
 
 const theme = {
 
