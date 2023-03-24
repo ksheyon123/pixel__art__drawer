@@ -1,7 +1,7 @@
 export const PATH = {
-  LOGIN: "/",
+  SIGN_IN: "/",
   SETUP: "/setup",
-  SIGN_IN: "/sign-in",
+  SIGN_UP: "/sign-up",
   PALETTE: "/palette"
 }
 

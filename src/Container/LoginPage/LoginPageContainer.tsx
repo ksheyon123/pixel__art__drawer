@@ -19,13 +19,13 @@ const LoginPageContainer = () => {
     }
   }
 
-  const getSignIn = () => {
-    navigate(PATH.SIGN_IN);
+  const getSignUp = () => {
+    navigate(PATH.SIGN_UP);
   }
 
   return {
     getLogin,
-    getSignIn,
+    getSignUp,
     setUserId,
     setPassword,
     userId,

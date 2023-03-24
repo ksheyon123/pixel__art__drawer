@@ -1,15 +1,15 @@
 import { createHashRouter } from "react-router-dom";
 import { Layout, Header } from "src/Components/index";
 import { PATH } from "src/Constants/index";
-import { LoginPage, CanvasPage, ElementSelectPage, SignInPage } from "src/Pages/";
+import { SignUpPage, CanvasPage, ElementSelectPage, SignInPage } from "src/Pages/";
 
 const Router = createHashRouter([
   {
-    path: PATH.LOGIN,
+    path: PATH.SIGN_IN,
     element:
       <Layout>
         <Header />
-        <LoginPage />
+        <SignInPage />
       </Layout>,
   },
   {
@@ -21,11 +21,11 @@ const Router = createHashRouter([
       </Layout>
   },
   {
-    path: PATH.SIGN_IN,
+    path: PATH.SIGN_UP,
     element:
       <Layout>
         <Header />
-        <SignInPage />
+        <SignUpPage />
       </Layout>
   },
   {
