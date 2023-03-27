@@ -9,6 +9,7 @@ export const useWeb3Wallet = () => {
     const { phrase } = mnemonic;
     const toArr = phrase.split(" ");
     console.log(toArr);
+    return toArr;
   }
 
   const matchMnemonic = () => {

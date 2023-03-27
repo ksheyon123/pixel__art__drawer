@@ -1,3 +1,4 @@
 export { PasswordForm } from "./PasswordForm";
-export { MnemonicForm } from "./MnemonicForm";
+export { MnemonicMatchForm } from "./MnemonicMatchForm";
+export { MnemonicDisplay } from "./MnemonicDisplay";
 export { Step } from "./Step";
