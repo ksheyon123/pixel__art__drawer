@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { PasswordContainer } from "src/Container/SignUpPage/PasswordContainer";
+import { PasswordContainer, MnemonicContainer } from "src/Container/SignUpPage/";
 
 const SignUpPage: React.FC = () => {
 
@@ -9,6 +9,7 @@ const SignUpPage: React.FC = () => {
       <div className="steper-wrapper">
 
       </div>
+      <MnemonicContainer />
       <PasswordContainer />
     </StyledView>
   )

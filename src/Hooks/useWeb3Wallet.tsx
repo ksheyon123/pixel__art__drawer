@@ -4,12 +4,17 @@ import { ethers } from "ethers";
 
 export const useWeb3Wallet = () => {
 
-  const createWallet = () => {
-    const rndSeed = ethers.Wallet.createRandom();
-    console.log(rndSeed);
+  const createMnemonic = () => {
+    const { mnemonic } = ethers.Wallet.createRandom();
+    const { phrase } = mnemonic;
+    const toArr = phrase.split(" ");
+    console.log(toArr);
+  }
+
+  const matchMnemonic = () => {
   }
 
   return {
-    createWallet
+    createMnemonic
   }
 }
