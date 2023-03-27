@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { PasswordContainer, MnemonicContainer } from "src/Container/SignUpPage/";
 
 const SignUpPage: React.FC = () => {
+  const [stepIdx, setStepIdx] = useState<number>(0);
 
   return (
     <StyledView>
@@ -18,6 +19,7 @@ const SignUpPage: React.FC = () => {
 const StyledView = styled.div`
   width : 100vw;
   height : 100vh;
+  padding-top : 40px;
 `;
 
 export { SignUpPage }
